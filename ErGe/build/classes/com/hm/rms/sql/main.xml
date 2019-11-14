@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- namespace就是Dao类的全名 -->
+<mapper namespace="com.hm.rms.dao.MainDao">
+	<!--查询列表返回-->
+	<resultMap id="ProductionResult" type="com.hm.rms.entity.ProductionTask">
+		<id property="id" column="id"/>
+		<result property="materielId" column="materiel_id"/>
+		<result property="measurUnitId" column="measur_unit_id"/>
+		<result property="vehicleModel" column="vehicle_model"/>
+		<result property="orderQuantity" column="order_quantity"/>
+		<result property="productionQuantity" column="production_quantity"/>
+		<result property="proMode" column="pro_mode"/>
+		<result property="orderVersion" column="order_version"/>
+		<result property="craftVersion" column="craft_version"/>
+		<result property="preDistributionQuantity" column="pre_distribution_quantity"/>
+		<result property="preResidueDistributionQuantity" column="pre_residue_distribution_quantity"/>
+		<result property="afterDistributionQuantity" column="after_distribution_quantity"/>
+		<result property="afterResidueDistributionQuantity" column="after_residue_distribution_quantity"/>
+		<result property="preDistributionDate" column="pre_distribution_date"/>
+		<result property="afterDistributionDate" column="after_distribution_date"/>
+		<result property="orderBatch" column="order_batch"/>
+		<result property="productBatch" column="product_batch"/>
+		<result property="orderNumber" column="order_number"/>
+		<result property="preStatus" column="pre_status"/>
+		<result property="afterStatus" column="after_status"/>
+		<result property="deliverDate" column="deliver_date"/>
+		<result property="halfProductionAllInWarehouse" column="half_production_all_in_warehouse"/>
+		<result property="halfProductionAllOutWarehouse" column="half_production_all_out_warehouse"/>
+		<result property="afterTaskStartTime" column="after_task_start_time"/>
+		<result property="afterTaskCompleteTime" column="after_task_complete_time"/>
+		<result property="preTaskStartTime" column="pre_task_start_time"/>
+		<result property="preTaskCompleteTime" column="pre_task_complete_time"/>
+		<result property="pullVersion" column="pull_version"/>
+		<result property="sortId" column="sort_id"/>
+		<result property="remarks" column="remarks"/>
+	</resultMap>
+	<select id="findDataList"
+		resultMap="ProductionResult">
+		select *  from production_task order by id asc limit #{page},#{rows}
+	</select>
+	<select id="findDataListCounts" resultType="java.lang.Integer">
+		select count(id) from production_task
+	</select>
+</mapper>
+

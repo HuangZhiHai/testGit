@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- namespace就是Dao类的全名 -->
+<mapper namespace="com.hm.rms.dao.WxLoginDao">
+	<select id="existTable" parameterType="String" resultType="Integer">  
+	 
+	 select  case when exists (select * from information_schema.TABLES where table_name  = #{tableName}) then 1 else 0 end
+	    <!-- select  case when exists (select * from [sysobjects] where name = #{tableName}) then 1 else 0 end -->   
+	    </select>  
+    <update id="createNewTable" parameterType="String">  
+        create table ${tableName} (  
+                            <!-- id int  identity(1,1) primary key not null,-->  
+                            id int primary key auto_increment,
+                            open_id varchar(255) not null,  
+                            session_key varchar(255) not null,  
+                            create_time varchar (64))  
+    </update> 
+	<insert id="wxLoginInsert" >
+		insert into ${tableName}
+			(open_id,session_key,create_time)
+		values(#{openid},#{session_key},#{date});
+	</insert>
+</mapper>
+

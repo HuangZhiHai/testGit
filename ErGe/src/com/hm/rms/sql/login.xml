@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- namespace就是Dao类的全名 -->
+<mapper namespace="com.hm.rms.dao.LoginDao">
+	<select id="login" 
+		resultType="com.hm.rms.entity.UserInfo">
+		select * from User_Info where UserName=#{userName} and UserPwd=#{password}
+	</select>
+	<select id="registration" 
+		resultType="com.hm.rms.entity.UserInfo">
+		select * from User_Info where UserName=#{userName}
+	</select>
+	<insert id="regInsert" >
+		insert into User_Info
+			(realName,userName,userPwd,eamilP,roleId)
+		values(#{realName},#{userName},#{userPwd},#{eamilP},#{roleId});
+	</insert>
+</mapper>
+
