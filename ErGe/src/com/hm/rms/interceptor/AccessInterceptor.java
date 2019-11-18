@@ -39,7 +39,7 @@ public class AccessInterceptor implements HandlerInterceptor {
 			response.getWriter().print(
 				"<script>window.top.location.href='"+
 				request.getContextPath()+
-				"/login/toLogin.action';</script>");
+				"toLogin.action';</script>");
 			/*response.sendRedirect(
 				request.getContextPath()+
 				"/login/toLogin.action");*/

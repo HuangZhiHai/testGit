@@ -30,14 +30,14 @@ function loginFunction(){
 	if($("#id").val() != "" && $("#id").val() != null && $("#id").val() != undefined){
 		if($("#password").val() != "" && $("#password").val() != null && $("#password").val() != undefined){
 			$.ajax({
-				url:getContextPath()+"/login/login.action",
+				url:"login.action",
 				type:"post",
 				dataType:"json",
 				data:{"userName":$("#id").val(),
 					  "password":$("#password").val()},
 				success:function(data){
 					if(data){
-						window.location.href = getContextPath()+"/login/toMain.action";
+						window.location.href = "toMain.action";
 					}else{
 						$("#loginMessage").html("用户名或密码错误！")
 					}
@@ -64,7 +64,7 @@ function regiestSumbmit(){
 					if(finalPWD != "" && finalPWD != null && finalPWD != undefined){
 						if(password == finalPWD){
 							$.ajax({
-								url:getContextPath()+"/login/toSubmitData.action",
+								url:"toSubmitData.action",
 								type:"post",
 								dataType:"json",
 								data:serializeForm($('#reg-form')),
