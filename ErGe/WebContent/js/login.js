@@ -36,7 +36,7 @@ function loginFunction(){
 				data:{"userName":$("#id").val(),
 					  "password":$("#password").val()},
 				success:function(data){
-					if(data){
+					if(data.success){
 						window.location.href = "toMain.action";
 					}else{
 						$("#loginMessage").html("用户名或密码错误！")
