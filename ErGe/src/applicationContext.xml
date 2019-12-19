@@ -63,6 +63,7 @@
 			              /：跟路径 -->
 			<mvc:mapping path="/**"/>
 			<!-- 排除路径 -->
+			<mvc:exclude-mapping path="/wx_01/*"/>
 			<mvc:exclude-mapping path="/api/*"/>
 			<mvc:exclude-mapping path="/api/api_order/*"/>
 			<mvc:exclude-mapping path="/login/*"/>

@@ -20,5 +20,35 @@ public interface WxLoginDao {
 	 * @param tableName
 	 */
 	void createNewTable(@Param("tableName") String tableName);
-	
+
+	boolean getTokenStatus(@Param("tableName") String tableName,@Param("token") String token,@Param("times") long times);
+	/**
+	 * 新建签到表
+	 * @param tableName
+	 */
+	void createSignTable(@Param("tableName") String tableName);
+
+	/**
+	 * 是否存在签到记录
+	 * @param tableName
+	 * @param date
+	 * @return
+	 */
+	boolean existsSignRecord(@Param("tableName") String tableName,@Param("token") String token,@Param("date") String date);
+	/**
+	 * 签到
+	 * @param tableName
+	 * @param token
+	 * @return
+	 */
+	void scoresign(@Param("tableName") String tableName,@Param("token") String token,@Param("createtime") String createtime,@Param("date") String date);
+
+	/**
+	 * 查询签到次数
+	 * @param tableName
+	 * @param token
+	 * @return
+	 */
+	int checkscoresign(@Param("tableName") String tableName,@Param("token") String token);
+
 }

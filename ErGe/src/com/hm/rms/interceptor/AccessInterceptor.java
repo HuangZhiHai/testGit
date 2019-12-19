@@ -35,11 +35,10 @@ public class AccessInterceptor implements HandlerInterceptor {
 		UserInfo user=(UserInfo)
 				session.getAttribute("user");
 		Cookie[] cookies = request.getCookies();
-		if(user==null && cookies == null){
+		if(user==null && cookies == null || "/toMain.action".equals(request.getRequestURI())){
 			response.getWriter().print(
 				"<script>window.top.location.href='"+
-				request.getContextPath()+
-				"toLogin.action';</script>");
+				"login/toLogin.action';</script>");
 			/*response.sendRedirect(
 				request.getContextPath()+
 				"/login/toLogin.action");*/

@@ -32,4 +32,54 @@ public class WxLoginServiceImpl implements WxLoginService{
 	public void createNewTable(String tableName) {
 		wxloginDao.createNewTable(tableName);
 	}
+
+	/**
+	 * 判断此token是否失效
+	 * @param tableName
+	 * @param token
+	 * @param times
+	 * @return
+	 */
+	public boolean getTokenStatus(String tableName,String token,long times){
+		return wxloginDao.getTokenStatus(tableName,token,times);
+	}
+
+	/**
+	 * 新建签到表
+	 * @param tableName
+	 */
+	@Override
+	public void createSignTable(String tableName) {
+		wxloginDao.createSignTable(tableName);
+	}
+
+	/**
+	 * 是否存在签到记录
+	 * @param tableName
+	 * @param date
+	 * @return
+	 */
+	public boolean existsSignRecord(String tableName,String token,String date){
+		return wxloginDao.existsSignRecord(tableName,token,date);
+	}
+	/**
+	 * 签到
+	 * @param tableName
+	 * @param token
+	 * @return
+	 */
+	public void scoresign(String tableName,String token,String createtime,String date){
+		 wxloginDao.scoresign(tableName,token,createtime,date);
+	}
+
+	/**
+	 * 查询签到次数
+	 * @param tableName
+	 * @param token
+	 * @return
+	 */
+	public int checkscoresign(String tableName,String token){
+		return wxloginDao.checkscoresign(tableName,token);
+	}
+
 }

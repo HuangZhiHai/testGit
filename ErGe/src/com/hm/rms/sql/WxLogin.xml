@@ -21,5 +21,54 @@
 			(open_id,session_key,create_time)
 		values(#{openid},#{session_key},#{date});
 	</insert>
+	<!--
+	boolean getTokenStatus(@Param("tableName") String tableName,@Param("token") String token,@Param("times") long times);
+	-->
+	<select id="getTokenStatus" resultType="java.lang.Boolean">
+		select case when exists(select 1 from ${tableName} where session_key = #{token} and (TIME_TO_SEC(now()) - TIME_TO_SEC(create_time)) &lt; #{times}) then 1 else 0 end
+	</select>
+
+	<update id="createSignTable" parameterType="String">
+		create table ${tableName} (
+		<!-- id int  identity(1,1) primary key not null,-->
+		id int primary key auto_increment,
+		session_key varchar(255) not null,
+		create_time varchar (100),
+		sign_date varchar(64))
+	</update>
+
+	<!--/**
+	* 当前是否存在签到记录
+	* @param tableName
+	* @param date
+	* @return
+	*/
+	boolean existsSignRecord(@Param("tableName") String tableName,@Param("token") String token,@Param("date") String date);-->
+	<select id="existsSignRecord" resultType="java.lang.Boolean">
+		select case when exists(select 1 from ${tableName} where session_key = #{token} and sign_date = #{date}) then 1 else 0 end
+	</select>
+
+	<!--/**
+	* 签到
+	* @param tableName
+	* @param token
+	* @return
+	*/
+	void scoresign(@Param("tableName") String tableName,@Param("token") String token,@Param("date") String date);;-->
+	<insert id="scoresign" >
+		insert into ${tableName}
+		(session_key,create_time,sign_date)
+		values(#{token},#{createtime},#{date});
+	</insert>
+	<!--/**
+	* 查询签到次数
+	* @param tableName
+	* @param token
+	* @return
+	*/
+	int checkscoresign(@Param("tableName") String tableName,@Param("token") String token);;-->
+	<select id="checkscoresign" resultType="java.lang.Integer">
+		select count(1) from ${tableName} where session_key = #{token}
+	</select>
 </mapper>
 

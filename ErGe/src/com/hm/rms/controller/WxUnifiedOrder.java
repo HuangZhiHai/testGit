@@ -42,8 +42,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/api/api_order")
 public class WxUnifiedOrder {
 	Logger logger = LoggerFactory.getLogger(getClass());
-    public static final String APPID = "";//ConfKit.get("AppId");      //服务号APPID
-    public static final String AppSecret = "";//ConfKit.get("AppSecret");  //服务号AppSecret
+    public static final String APPID = "wx9ffd3c689139325f";//ConfKit.get("AppId");      //服务号APPID
+    public static final String AppSecret = "6d67de83d4889df97f045704689ad16b";//ConfKit.get("AppSecret");  //服务号AppSecret
     public static final String MCH_ID = "";//ConfKit.get("MCH_ID");     //支付商户号
     public static final String API_KEY ="";// ConfKit.get("API_KEY");    //API密钥
     public  String requestUrlMessageFormat = "https://api.weixin.qq.com/sns/jscode2session?appid={0}&secret={1}&js_code={2}&grant_type=authorization_code";
