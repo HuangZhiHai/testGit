@@ -1,6 +1,7 @@
 package com.hm.rms.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -44,13 +45,21 @@ public interface WxLoginService {
 	 * @return
 	 */
 	boolean existsSignRecord(String tableName,String token,String date);
+
 	/**
 	 * 签到
-	 * @param tableName
-	 * @param token
-	 * @return
+	 * @param tableName 表面
+	 * @param token 唯一标识
+	 * @param createtime 创建时间
+	 * @param date 签到日期
+	 * @param nickName 昵称
+	 * @param city 城市
+	 * @param country 国家
+	 * @param province 省份
+	 * @param gender 性别
+	 * @param avatarUrl 头像
 	 */
-	void scoresign(String tableName,String token,String createtime,String date);
+	void scoresign(String tableName,String token,String createtime,String date,String nickName,String city,String country,String province,String gender,String avatarUrl);
 
 	/**
 	 * 查询签到次数
@@ -59,6 +68,27 @@ public interface WxLoginService {
 	 * @return
 	 */
 	int checkscoresign(String tableName,String token);
+	/**
+	 * 新建反馈表
+	 * @param tableName
+	 */
+	void createFeedBackTable(String tableName);
 
-
+	/**
+	 * @param tableName 表名
+	 * @param token 微信唯一表示
+	 * @param fbType 返回类型
+	 * @param textareaTxt 文本域内容
+	 * @param inputTxt 电话号内容
+	 * @param creattime 当前时间
+	 */
+	void feedBack(String tableName,String token,String creattime,String fbType,String textareaTxt,String inputTxt);
+	/**
+	 * 获取所有签到日期（当年，当月）
+	 * @param token 微信唯一标识
+	 * @param curyear 当前年
+	 * @param curmonth 当前月
+	 * @return
+	 */
+	List<String> findAllScoresignDays(String tableName,String token,String curyear,String curmonth);
 }

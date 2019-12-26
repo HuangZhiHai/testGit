@@ -2,7 +2,6 @@ package com.hm.rms.entity;
 
 import org.apache.ibatis.type.Alias;
 
-import java.util.Date;
 import java.util.List;
 @Alias("ProductionTask")
 public class ProductionTask {
@@ -26,26 +25,26 @@ public class ProductionTask {
     private Integer preResidueDistributionQuantity;//前序下派剩余数量
     private Integer afterDistributionQuantity;//后序下派数量
     private Integer afterResidueDistributionQuantity;//后序下派剩余数量
-    private Date preDistributionDate;//前序分配日期
-    private Date afterDistributionDate;//后序下派日期
+    private String preDistributionDate;//前序分配日期
+    private String afterDistributionDate;//后序下派日期
     private String orderBatch;//订单批次
     private String productBatch;//生产批次
     private String orderNumber;//订单编号
     private String preStatus;//前序任务状态（1已下派,0未下派，2半成品全部入库完成，3半成品全部出库完成）
     private String afterStatus;//后序任务状态(0未下派，1已下派)
-    private Date deliverDate;//交货日期
-    private Date halfProductionAllInWarehouse;//半成品全部入库时间
-    private Date halfProductionAllOutWarehouse;//半成品全部出库时间
-    private Date afterTaskStartTime;//后序任务开始时间
-    private Date afterTaskCompleteTime;//后序任务完成时间
-    private Date preTaskStartTime;//前序开始时间
-    private Date preTaskCompleteTime;//前序完成时间
+    private String deliverDate;//交货日期
+    private String halfProductionAllInWarehouse;//半成品全部入库时间
+    private String halfProductionAllOutWarehouse;//半成品全部出库时间
+    private String afterTaskStartTime;//后序任务开始时间
+    private String afterTaskCompleteTime;//后序任务完成时间
+    private String preTaskStartTime;//前序开始时间
+    private String preTaskCompleteTime;//前序完成时间
     private String afterCraftProcess;//对应后序任务主表中工艺流程字段--用于json映射bean，不做数据存储
     private String pullVersion;//拉动版本号
     private String ufts;//时间戳 (同步U8字段)
     private String sortId;//订单式混排（记录先选中订单的ID,然后按顺序拼接12345...数组）
     private String updateSortBy;//排序更新人
-    private Date updateSortDate;//排序更新时间
+    private String updateSortDate;//排序更新时间
     /** 行号 **/
     private String irowno;
     /**转配字段，用于显示 不做存储**/
@@ -241,19 +240,19 @@ public class ProductionTask {
         this.afterResidueDistributionQuantity = afterResidueDistributionQuantity;
     }
 
-    public Date getPreDistributionDate() {
+    public String getPreDistributionDate() {
         return preDistributionDate;
     }
 
-    public void setPreDistributionDate(Date preDistributionDate) {
+    public void setPreDistributionDate(String preDistributionDate) {
         this.preDistributionDate = preDistributionDate;
     }
 
-    public Date getAfterDistributionDate() {
+    public String getAfterDistributionDate() {
         return afterDistributionDate;
     }
 
-    public void setAfterDistributionDate(Date afterDistributionDate) {
+    public void setAfterDistributionDate(String afterDistributionDate) {
         this.afterDistributionDate = afterDistributionDate;
     }
 
@@ -286,7 +285,12 @@ public class ProductionTask {
     }
 
     public void setPreStatus(String preStatus) {
-        this.preStatus = preStatus;
+        if("1".equals(preStatus)){
+            this.preStatus = "是";
+        }else{
+            this.preStatus = "否";
+        }
+
     }
 
     public String getAfterStatus() {
@@ -294,62 +298,66 @@ public class ProductionTask {
     }
 
     public void setAfterStatus(String afterStatus) {
-        this.afterStatus = afterStatus;
+        if("1".equals(afterStatus)){
+            this.afterStatus = "是";
+        }else{
+            this.afterStatus = "否";
+        }
     }
 
-    public Date getDeliverDate() {
+    public String getDeliverDate() {
         return deliverDate;
     }
 
-    public void setDeliverDate(Date deliverDate) {
+    public void setDeliverDate(String deliverDate) {
         this.deliverDate = deliverDate;
     }
 
-    public Date getHalfProductionAllInWarehouse() {
+    public String getHalfProductionAllInWarehouse() {
         return halfProductionAllInWarehouse;
     }
 
-    public void setHalfProductionAllInWarehouse(Date halfProductionAllInWarehouse) {
+    public void setHalfProductionAllInWarehouse(String halfProductionAllInWarehouse) {
         this.halfProductionAllInWarehouse = halfProductionAllInWarehouse;
     }
 
-    public Date getHalfProductionAllOutWarehouse() {
+    public String getHalfProductionAllOutWarehouse() {
         return halfProductionAllOutWarehouse;
     }
 
-    public void setHalfProductionAllOutWarehouse(Date halfProductionAllOutWarehouse) {
+    public void setHalfProductionAllOutWarehouse(String halfProductionAllOutWarehouse) {
         this.halfProductionAllOutWarehouse = halfProductionAllOutWarehouse;
     }
 
-    public Date getAfterTaskStartTime() {
+    public String getAfterTaskStartTime() {
         return afterTaskStartTime;
     }
 
-    public void setAfterTaskStartTime(Date afterTaskStartTime) {
+    public void setAfterTaskStartTime(String afterTaskStartTime) {
         this.afterTaskStartTime = afterTaskStartTime;
     }
 
-    public Date getAfterTaskCompleteTime() {
+    public String getAfterTaskCompleteTime() {
         return afterTaskCompleteTime;
     }
 
-    public void setAfterTaskCompleteTime(Date afterTaskCompleteTime) {
+    public void setAfterTaskCompleteTime(String afterTaskCompleteTime) {
         this.afterTaskCompleteTime = afterTaskCompleteTime;
     }
 
-    public Date getPreTaskStartTime() {
+    public String getPreTaskStartTime() {
         return preTaskStartTime;
     }
 
-    public void setPreTaskStartTime(Date preTaskStartTime) {
+    public void setPreTaskStartTime(String preTaskStartTime) {
         this.preTaskStartTime = preTaskStartTime;
     }
 
-    public Date getPreTaskCompleteTime() {
+    public String getPreTaskCompleteTime() {
         return preTaskCompleteTime;
     }
 
-    public void setPreTaskCompleteTime(Date preTaskCompleteTime) {
+    public void setPreTaskCompleteTime(String preTaskCompleteTime) {
         this.preTaskCompleteTime = preTaskCompleteTime;
     }
 
@@ -393,11 +401,11 @@ public class ProductionTask {
         this.updateSortBy = updateSortBy;
     }
 
-    public Date getUpdateSortDate() {
+    public String getUpdateSortDate() {
         return updateSortDate;
     }
 
-    public void setUpdateSortDate(Date updateSortDate) {
+    public void setUpdateSortDate(String updateSortDate) {
         this.updateSortDate = updateSortDate;
     }
 

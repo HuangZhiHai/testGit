@@ -33,8 +33,15 @@
 		<!-- id int  identity(1,1) primary key not null,-->
 		id int primary key auto_increment,
 		session_key varchar(255) not null,
+		nick_name varchar(100) CHARACTER  set utf8 DEFAULT  null,
 		create_time varchar (100),
-		sign_date varchar(64))
+		sign_date varchar(64),
+		city varchar(50) CHARACTER  set utf8 DEFAULT  null,
+		country varchar(50) CHARACTER  set utf8 DEFAULT  null,
+		province varchar(50) CHARACTER  set utf8 DEFAULT  null,
+		gender varchar(2) CHARACTER  set utf8 DEFAULT  null,
+		avatar_url varchar(2000) CHARACTER  set utf8 DEFAULT  null
+		)
 	</update>
 
 	<!--/**
@@ -48,17 +55,18 @@
 		select case when exists(select 1 from ${tableName} where session_key = #{token} and sign_date = #{date}) then 1 else 0 end
 	</select>
 
-	<!--/**
-	* 签到
-	* @param tableName
-	* @param token
-	* @return
-	*/
-	void scoresign(@Param("tableName") String tableName,@Param("token") String token,@Param("date") String date);;-->
+	<!--
+	/*
+	 * 签到
+	 * @param tableName
+	 * @param token
+	 * @return
+	 */
+	void scoresign(@Param("tableName") String tableName,@Param("token") String token,@Param("createtime") String createtime,@Param("date") String date,@Param("nickName") String nickName,@Param("city") String city,@Param("country") String country,@Param("province") String province,@Param("gender") String gender,@Param("avatarUrl") String avatarUrl);-->
 	<insert id="scoresign" >
 		insert into ${tableName}
-		(session_key,create_time,sign_date)
-		values(#{token},#{createtime},#{date});
+		(session_key,create_time,sign_date,nick_name,city,country,province,gender,avatar_url)
+		values(#{token},#{createtime},#{date},#{nickName},#{city},#{country},#{province},#{gender},#{avatarUrl});
 	</insert>
 	<!--/**
 	* 查询签到次数
@@ -69,6 +77,52 @@
 	int checkscoresign(@Param("tableName") String tableName,@Param("token") String token);;-->
 	<select id="checkscoresign" resultType="java.lang.Integer">
 		select count(1) from ${tableName} where session_key = #{token}
+	</select>
+	<!--
+	/**
+	 * 新建反馈表
+	 * @param tableName
+	 */
+	-->
+	<update id="createFeedBackTable" parameterType="String">
+		create table ${tableName} (
+		<!-- id int  identity(1,1) primary key not null,-->
+		id int primary key auto_increment,
+		session_key varchar(255) not null,
+		create_time varchar (100),
+		fb_type varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+		textarea_txt varchar(500) CHARACTER SET utf8 DEFAULT NULL,
+		input_txt varchar(11) CHARACTER SET utf8 DEFAULT NULL)
+	</update>
+	<!--
+	/**
+	 * @param tableName 表名
+	 * @param token 微信唯一表示
+	 * @param fbType 返回类型
+	 * @param textareaTxt 文本域内容
+	 * @param inputTxt 电话号内容
+	 * @param creattime 当前时间
+	 */
+	 void feedBack(@Param("tableName") String tableName,@Param("token") String token,@Param("creattime") String creattime,
+				   @Param("fbType") String fbType,@Param("textareaTxt") String textareaTxt,@Param("inputTxt") String inputTxt);
+	-->
+	<insert id="feedBack">
+		insert into ${tableName}
+			(session_key,create_time,fb_type,textarea_txt,input_txt)
+		values(#{token},#{creattime},#{fbType},#{textareaTxt},#{inputTxt});
+	</insert>
+	<!--
+	/**
+	 * 获取所有签到日期（当年，当月）
+	 * @param token 微信唯一标识
+	 * @param curyear 当前年
+	 * @param curmonth 当前月
+	 * @return
+	 */
+	List<String> findAllScoresignDays(@Param("tableName") String tableName,@Param("token")  String token, @Param("curyear") String curyear, @Param("curmonth") String curmonth);
+	-->
+	<select id="findAllScoresignDays" resultType="java.lang.String">
+		select sign_date from ${tableName} where  session_key = #{token} and YEAR(sign_date) = #{curyear} and MONTH(sign_date) = #{curmonth}
 	</select>
 </mapper>
 
