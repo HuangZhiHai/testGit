@@ -15,7 +15,11 @@
 
 	  
 </head>
- 
+<style type="text/css">
+	.font-css{
+		font-color:white;font-size:20px
+	}
+</style>
 <body>
 	
 <canvas id="christmasCanvas" style="top: 0px; left: 0px; z-index: 5000; position: fixed; pointer-events: none;" width="1285" height="100%"></canvas>
@@ -56,7 +60,7 @@ var rootUrl = "${pageContext.request.contextPath}";
   snow();
 </script>
 
-<h2 align="center">倾心食坊</h2>
+<h2 align="center">Let's Study</h2>
 
 <div class="login_frame"></div>
 
@@ -68,7 +72,7 @@ var rootUrl = "${pageContext.request.contextPath}";
 			<p><input type="password" name="password" id="password" placeholder="密码" value=""></p>
 			<p class="login-submit"><button type="submit" class="login-button" id ="submit" onclick="loginFunction()">登录</button></p>
 		</div>
-	<p class="registration  btn" id="regiest"><a>快速注册</a></p>
+	<%--<p class="registration  btn" id="regiest"><a>快速注册</a></p>--%>
 	</div>
 </div>
 	
@@ -90,8 +94,10 @@ var rootUrl = "${pageContext.request.contextPath}";
 		</div>
 	</div>
 </div>
-
-<div id="timeArea"><script type="text/javascript">LoadBlogParts();</script></div>
+<div id="timeArea">
+	<div ><span  class = 'font-css'>吉ICP备19006854号</span></div>
+	<script type="text/javascript">LoadBlogParts();</script>
+</div>
 
 <script type="text/javascript">
 $(function(){
