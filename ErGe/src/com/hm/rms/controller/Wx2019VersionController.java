@@ -146,7 +146,7 @@ public class Wx2019VersionController {
         maps.put("id","1");
         maps.put("descript","JVM说明、配置，GC的过程和具体配置值。？");
         maps.put("title","JVM调优");
-        maps.put("pic","/image/2287481-c6f396db25df2ddd.jpg");
+        maps.put("pic","/image/2287481c6f396db25df2ddd.jpg");
         list.add(maps);
         Map<String,Object> maps1 = new HashMap<>();
         maps1.put("id","2");
