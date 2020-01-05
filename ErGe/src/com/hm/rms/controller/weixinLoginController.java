@@ -100,6 +100,8 @@ public class weixinLoginController {
 			boolean b = wxlogin.getTokenStatus(tableName,token,times);
 			if(b){
 				maps.put("code",200);
+			}else{
+				maps.put("code",400);
 			}
 		}catch(Exception e){
 			maps.put("code",400);
